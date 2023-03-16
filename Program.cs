@@ -29,41 +29,46 @@ namespace ConsoleApp1
             //Console.WriteLine("Средний вес: " + average);
 
 
+            //Дан курс рубля за каждый день феврале месяце (случайным образом) рассчитать средний курс рубля, максимальный курс рубля и день с максимальным курсом, минимальный курс рубля и день с минимальным курсом. Заполнить массив случайным образом. Диапазон от 5-65
 
 
-            // Нахождение максимального элемента и его индекса одномерного массива 
-
-            int[] array = {8, -1, 4, 16, -5, 3};
-            int max = array[0];
-            int indexMax = 0;
-            int min_element = array[0];
-            int min_index = 0;
-
-            //for(int i=1; i<array.Length; i++)
-            //{
-            //    if(array[i] < min_element)
-            //    {
-            //        min_element = array[i];
-            //        min_index = i;
-            //    }
-            //}
-
-            for(int i = 1; i < array.Length; i++)
+            Random random = new Random();
+            double[] rubleRates = new double[28];
+            for (int i = 0; i < rubleRates.Length; i++ )
             {
-                if (array[i] > max) {
-                    max = array[i]; indexMax = i;
+                rubleRates[i] =50+ random.NextDouble() * 10.0;
+            }
+
+            double total = 0;
+            foreach(double rate in rubleRates)
+            {
+                total += rate;
+            }
+
+            double averageRate = total / rubleRates.Length;
+            double maxRate = rubleRates[0];
+            int maxRateDay = 1;
+            double minRate = rubleRates[0];
+            int minRateDay = 1;
+
+            for (int i = 1; i < rubleRates.Length; i++)
+            {
+                if (rubleRates[i] > maxRate)
+                {
+                    maxRate = rubleRates[i];
+                    maxRateDay = i + 1;
                 }
 
-                if (array[i] < min_element)
+                if(rubleRates[i] < maxRate)
                 {
-                    min_element = array[i];
-                    min_index = i;
+                    minRate = rubleRates[i];
+                    minRateDay = i + 1;
                 }
             }
 
-            Console.WriteLine($"max = {max}\t indexMax = {indexMax}");
-            Console.WriteLine("Minimal element:" + min_element);
-            Console.WriteLine("Minimal index:" + min_index);
+            Console.WriteLine(averageRate);
+            Console.WriteLine($"{maxRate}, {maxRateDay}");
+            Console.WriteLine($"{minRate}, {minRateDay}");
         }
     }
 }
